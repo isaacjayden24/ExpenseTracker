@@ -14,7 +14,7 @@ import androidx.room.RoomDatabase
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        fun getDatabase(context: Context): AppDatabase {
+        fun getDatabase(context: Context): AppDatabase  {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
@@ -26,27 +26,7 @@ import androidx.room.RoomDatabase
             }
         }
 
-        /*fun getDatabase(
-            context: Context,
-            scope: CoroutineScope
-        ): AppDatabase {*/
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
-           /* return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "expense_database"
-                )
-                    // Wipes and rebuilds instead of migrating if no Migration object.
-                    // Migration is not part of this codelab.
-                    .fallbackToDestructiveMigration()
-                    .addCallback(WordDatabaseCallback(scope))
-                    .build()
-                INSTANCE = instance
-                // return instance
-                instance
-            }*/
+
 
         }
 

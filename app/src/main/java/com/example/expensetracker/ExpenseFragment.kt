@@ -21,12 +21,14 @@ import com.example.expensetracker.entity.ExpenseViewModelFactory
  */
 class ExpenseFragment : Fragment() {
 
-    private lateinit var database: AppDatabase // Initialize this with your database instance
+    private lateinit var database: AppDatabase // Initialize this with your database instance(object)
+
+    //initialize the view model
     private val expenseViewModel: ExpenseViewModel by viewModels {
         ExpenseViewModelFactory(database)
     }
 
-    private lateinit var expenseInput: EditText
+    private lateinit var amountInput: EditText
     private lateinit var btnAdd: Button
     private lateinit var adapter: ExpenseAdapter
 
@@ -45,13 +47,15 @@ class ExpenseFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_expense, container, false)
 
+        amountInput = view.findViewById(R.id.amountInput)
+        btnAdd = view.findViewById(R.id.btn_add)
+
         // Initialize the adapter
         adapter = ExpenseAdapter()
 
 
 
-        expenseInput = view.findViewById(R.id.expenseInput)
-        btnAdd = view.findViewById(R.id.btn_add)
+
 
         btnAdd.setOnClickListener {
            /* val newExpense = Expense(
@@ -87,26 +91,12 @@ class ExpenseFragment : Fragment() {
 
         findNavController().navigate(R.id.action_expenseFragment_to_displayExpenseFragment)
     }
+
+
 }
 
 
 
-    //this function should retrieve all expenses and display them as live data
-   /* fun allUser():List<Expense>{
 
-        return expenseViewModel.allExpenses()
-
-    }*/
-
-
-   /* fun updateUser(){
-
-    }*/
-
-   //pass the all user here after retrieval to be deleted
-   /* fun deleteUser(exp:List<Expense>){
-        expenseViewModel.deleteExpense(exp[0])
-
-    }*/
 
 

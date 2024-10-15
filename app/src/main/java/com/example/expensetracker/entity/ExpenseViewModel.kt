@@ -32,7 +32,7 @@ class ExpenseViewModel(private val database: AppDatabase) : ViewModel() {
 
 
 
-  /* // val allExpenses = database.expenseDao().getAllExpenses()
+  /* val allExpenses = database.expenseDao().getAllExpenses()
     fun allExpenses(expense: Expense){
 
         viewModelScope.launch {

@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="0dp">
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="12dp">
-
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="6dp"
+    app:cardCornerRadius="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="4dp">  <!-- Reduced padding -->
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,9 +23,10 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/amount_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Amount:"
+                android:layout_weight="1"
+                android:text="Amount: $0.00"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
@@ -40,37 +35,55 @@
                 android:id="@+id/delete_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:contentDescription="delete"
                 app:icon="@drawable/delete_button"
                 app:iconTint="@color/white"
                 app:backgroundTint="@color/red"
                 app:iconGravity="textStart"
-                android:layout_marginStart="8dp"
-                android:layout_gravity="center_vertical"/>
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
         </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/category_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category:"
+            android:text="Category: Food"
             android:textSize="18sp"
-            android:textStyle="bold"
             android:textColor="@color/gray"
-            android:layout_marginTop="4dp"/>  <!-- Reduced margin -->
+            android:layout_marginTop="8dp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/details_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description:"
+            android:text="Description: Lunch with friends"
             android:textSize="16sp"
-            android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_marginTop="4dp"/>  <!-- Reduced margin -->
+            android:layout_marginTop="4dp" />
 
+        <!-- Additional Info Section -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date: 01/01/2024"
+            android:textSize="14sp"
+            android:textColor="@color/gray"
+            android:layout_marginTop="8dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/payment_method_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Payment Method: Credit Card"
+            android:textSize="14sp"
+            android:textColor="@color/gray"
+            android:layout_marginTop="4dp" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
-</LinearLayout>
+
+
 
 

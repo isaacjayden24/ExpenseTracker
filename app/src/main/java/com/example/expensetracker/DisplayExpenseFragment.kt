@@ -49,10 +49,12 @@ class DisplayExpenseFragment : Fragment() {
         expenseRecyclerView.adapter = adapter
         expenseRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        // Observe LiveData
+        // Observe LiveData and pass it to the Adapter for display using recycler view
         expenseViewModel.allExpenses.observe(viewLifecycleOwner) { expenses ->
             expenses?.let { adapter.submitList(it) }
         }
+
+
 
 
 
