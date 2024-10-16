@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ExpenseViewModel(private val database: AppDatabase) : ViewModel() {
@@ -25,23 +26,17 @@ class ExpenseViewModel(private val database: AppDatabase) : ViewModel() {
 
     // Function to fetch all expenses
     private fun fetchAllExpenses() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _allExpenses.value = database.expenseDao().getAllExpenses()
         }
     }
 
 
 
-  /* val allExpenses = database.expenseDao().getAllExpenses()
-    fun allExpenses(expense: Expense){
 
-        viewModelScope.launch {
-            database.expenseDao().getAllExpenses()
-        }
-    }*/
 
     fun addExpense(expense: Expense) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             database.expenseDao().insertExpense(expense)
             fetchAllExpenses()
 
@@ -49,13 +44,13 @@ class ExpenseViewModel(private val database: AppDatabase) : ViewModel() {
     }
 
     fun updateExpense(expense: Expense) {
-        viewModelScope.launch {
+        viewModelScope.launch (Dispatchers.IO){
             database.expenseDao().updateExpense(expense)
         }
     }
 
     fun deleteExpense(expense: Expense) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             database.expenseDao().deleteExpense(expense)
         }
     }

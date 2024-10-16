@@ -155,7 +155,8 @@ android:background="#F8F9FA">
             android:id="@+id/tagChipGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
                 android:layout_width="wrap_content"
@@ -164,24 +165,28 @@ android:background="#F8F9FA">
                 style="@style/Widget.MaterialComponents.Chip.Filter"/>
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/cardChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Credit Card"
                 style="@style/Widget.MaterialComponents.Chip.Filter"/>
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/paypalChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Paypal"
                 style="@style/Widget.MaterialComponents.Chip.Filter"/>
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/mpesaChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mpesa"
                 style="@style/Widget.MaterialComponents.Chip.Filter"/>
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/debitChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Debit card"

@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expensetracker.entity.Expense
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 class ExpenseAdapter : ListAdapter<Expense, ExpenseAdapter.ExpenseViewHolder>(ExpenseDiffCallback()) {
@@ -34,9 +37,13 @@ class ExpenseAdapter : ListAdapter<Expense, ExpenseAdapter.ExpenseViewHolder>(Ex
 
         @SuppressLint("SetTextI18n")
         fun bind(expense: Expense) {
-            expenseCategoryTextView.text = expense.category
+            expenseCategoryTextView.text = "Category: ${expense.category}"
             expenseAmountTextView.text = "$${expense.amount}"
-            expenseDetailsTextView.text = expense.details
+            expenseDetailsTextView.text = "Description: ${expense.details}"
+            // Format and set the date (Convert from milliseconds to readable date format)
+            val formattedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(expense.date))
+            expenseDateTextView.text= "Date: $formattedDate"
+            expensePaymentMethodTextView.text="Payment Method: ${expense.paymentInfo}"
         }
     }
 
