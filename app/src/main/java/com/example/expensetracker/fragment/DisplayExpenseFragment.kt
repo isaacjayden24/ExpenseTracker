@@ -1,14 +1,19 @@
-package com.example.expensetracker
+package com.example.expensetracker.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.expensetracker.entity.AppDatabase
+import com.example.expensetracker.ExpenseAdapter
+import com.example.expensetracker.ExpenseTrackerApp
+import com.example.expensetracker.R
 import com.example.expensetracker.entity.ExpenseViewModel
 import com.example.expensetracker.entity.ExpenseViewModelFactory
 
@@ -20,11 +25,12 @@ import com.example.expensetracker.entity.ExpenseViewModelFactory
  */
 class DisplayExpenseFragment : Fragment() {
 
-    private lateinit var database: AppDatabase
+
 
     private val expenseViewModel: ExpenseViewModel by viewModels {
-        ExpenseViewModelFactory(database)
-    }
+      ExpenseViewModelFactory((requireActivity().application as ExpenseTrackerApp).database)
+   }
+
 
     private lateinit var expenseRecyclerView: RecyclerView
     private lateinit var adapter: ExpenseAdapter
@@ -32,7 +38,7 @@ class DisplayExpenseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        database = AppDatabase.getDatabase(requireContext())
+
 
     }
 
@@ -43,9 +49,26 @@ class DisplayExpenseFragment : Fragment() {
         // Inflate the layout for this fragment
         val view=inflater.inflate(R.layout.fragment_display_expense, container, false)
 
+        // Set up toolbar
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+        // Enable back button in the toolbar
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        // Handle the navigation icon click
+        toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack() // Go back to the previous fragment
+        }
+
+
         // Initialize RecyclerView and Adapter
         expenseRecyclerView = view.findViewById(R.id.expenseRecyclerView)
-        adapter = ExpenseAdapter()
+        // Pass the delete lambda to the adapter
+        adapter = ExpenseAdapter { expense ->
+            expenseViewModel.deleteExpense(expense)
+        }
+
         expenseRecyclerView.adapter = adapter
         expenseRecyclerView.layoutManager = LinearLayoutManager(context)
 

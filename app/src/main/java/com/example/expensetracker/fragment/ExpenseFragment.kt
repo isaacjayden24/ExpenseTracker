@@ -1,4 +1,4 @@
-package com.example.expensetracker
+package com.example.expensetracker.fragment
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -13,7 +13,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.expensetracker.entity.AppDatabase
+import com.example.expensetracker.ExpenseAdapter
+import com.example.expensetracker.ExpenseTrackerApp
+import com.example.expensetracker.R
 import com.example.expensetracker.entity.Expense
 import com.example.expensetracker.entity.ExpenseViewModel
 import com.example.expensetracker.entity.ExpenseViewModelFactory
@@ -32,17 +34,18 @@ import java.util.Locale
  */
 class ExpenseFragment : Fragment() {
 
-    private lateinit var database: AppDatabase // Initialize this with your database instance(object)
-    val categories = listOf("Category 1", "Category 2", "Category 3", "Category 4")//categories for expenses dropdown
+    val categories = listOf("Food", "Bills", "Subscription", "Rent", "Electricity","Transport","Entertainment","Fuel","Savings","Friends","clothes","Others")//categories for expenses dropdown
 
     private lateinit var dateInput: TextInputEditText//for the date selection
     private var selectedDateInMillis: Long? = null//for the date selection
 
 
-    //initialize the view model
+
     private val expenseViewModel: ExpenseViewModel by viewModels {
-        ExpenseViewModelFactory(database)
+        ExpenseViewModelFactory((requireActivity().application as ExpenseTrackerApp).database)
     }
+
+
 
     private lateinit var amountInput: EditText
     private lateinit var btnAdd: Button
@@ -54,8 +57,7 @@ class ExpenseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Initialize the database
-        database = AppDatabase.getDatabase(requireContext())
+
     }
 
     override fun onCreateView(
@@ -74,7 +76,7 @@ class ExpenseFragment : Fragment() {
         chipGroup=view.findViewById(R.id.tagChipGroup)
 
         //adapter to hold the category items
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, categories)
+        val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line, categories)
         categoryDropdown.setAdapter(adapter)
 
 
@@ -85,8 +87,12 @@ class ExpenseFragment : Fragment() {
 
 
 
+
         // Initialize the adapter for the recycler view
-        adapterExpense = ExpenseAdapter()
+        // Pass the delete lambda to the adapter
+        adapterExpense = ExpenseAdapter { expense ->
+            expenseViewModel.deleteExpense(expense)
+        }
 
 
 
@@ -166,18 +172,7 @@ class ExpenseFragment : Fragment() {
             return
         }
 
-       /* val selectedChipId = chipGroup.checkedChipId
-        val selectedChipText = if (selectedChipId != View.NO_ID) {
-            val selectedChip = chipGroup.findViewById<Chip>(selectedChipId)
-            selectedChip.text.toString()
-        } else {
-            null
-        }
 
-        if (selectedChipText == null) {
-            Toast.makeText(context, "Please select a payment option", Toast.LENGTH_SHORT).show()
-            return
-        }*/
         // Get the selected chip from the ChipGroup
         val selectedChipId = chipGroup.checkedChipId
         if (selectedChipId == View.NO_ID) {
@@ -205,6 +200,8 @@ class ExpenseFragment : Fragment() {
         expenseViewModel.addExpense(newExpense)
 
         findNavController().navigate(R.id.action_expenseFragment_to_displayExpenseFragment)
+
+        //findNavController().navigate(R.id.action_expenseFragment_to_visualizationFragment)
     }
 
 

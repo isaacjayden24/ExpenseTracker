@@ -5,6 +5,9 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,7 +18,8 @@ import java.util.Date
 import java.util.Locale
 
 
-class ExpenseAdapter : ListAdapter<Expense, ExpenseAdapter.ExpenseViewHolder>(ExpenseDiffCallback()) {
+class ExpenseAdapter(private val onDeleteClick: (Expense) -> Unit)
+    : ListAdapter<Expense, ExpenseAdapter.ExpenseViewHolder>(ExpenseDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.expense_item, parent, false)
@@ -24,7 +28,7 @@ class ExpenseAdapter : ListAdapter<Expense, ExpenseAdapter.ExpenseViewHolder>(Ex
 
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
         val expense = getItem(position)
-        holder.bind(expense)
+        holder.bind(expense,onDeleteClick)
     }
 
     // ViewHolder class
@@ -34,16 +38,41 @@ class ExpenseAdapter : ListAdapter<Expense, ExpenseAdapter.ExpenseViewHolder>(Ex
         private val expenseDetailsTextView: TextView = itemView.findViewById(R.id.details_text)//description
         private val expenseDateTextView:TextView=itemView.findViewById(R.id.date_text)//date
         private val expensePaymentMethodTextView:TextView=itemView.findViewById(R.id.payment_method_text)//payment
+        private val deleteBtn:Button=itemView.findViewById(R.id.delete_button)
 
         @SuppressLint("SetTextI18n")
-        fun bind(expense: Expense) {
+        fun bind(expense: Expense,onDeleteClick: (Expense) -> Unit) {
             expenseCategoryTextView.text = "Category: ${expense.category}"
             expenseAmountTextView.text = "$${expense.amount}"
             expenseDetailsTextView.text = "Description: ${expense.details}"
+
             // Format and set the date (Convert from milliseconds to readable date format)
             val formattedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(expense.date))
             expenseDateTextView.text= "Date: $formattedDate"
+
             expensePaymentMethodTextView.text="Payment Method: ${expense.paymentInfo}"
+
+            //delete button functionality
+            // Set click listener for the delete button
+            deleteBtn.setOnClickListener {
+                //onDeleteClick(expense)
+                val fadeOutAnimation = AnimationUtils.loadAnimation(itemView.context, R.anim.fade_out)
+
+                // Start the fade-out animation
+                itemView.startAnimation(fadeOutAnimation)
+
+                // Wait for the animation to finish before removing the item
+                fadeOutAnimation.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation?) {}
+                    override fun onAnimationEnd(animation: Animation?) {
+                        // Call the delete function after the animation finishes
+                        onDeleteClick(expense)  // ViewModel handles removing from DB
+
+
+                    }
+                    override fun onAnimationRepeat(animation: Animation?) {}
+                })
+            }
         }
     }
 

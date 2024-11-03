@@ -3,19 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/expenseFragment">
+    app:startDestination="@id/splashFragment2">
+    <fragment
+        android:id="@+id/splashFragment2"
+        android:name="com.example.expensetracker.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment2_to_expenseFragment"
+            app:destination="@id/expenseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/expenseFragment"
-        android:name="com.example.expensetracker.ExpenseFragment"
+        android:name="com.example.expensetracker.fragment.ExpenseFragment"
         android:label="fragment_expense"
         tools:layout="@layout/fragment_expense" >
         <action
             android:id="@+id/action_expenseFragment_to_displayExpenseFragment"
             app:destination="@id/displayExpenseFragment" />
+        <action
+            android:id="@+id/action_expenseFragment_to_visualizationFragment"
+            app:destination="@id/visualizationFragment" />
     </fragment>
     <fragment
+        android:id="@+id/visualizationFragment"
+        android:name="com.example.expensetracker.fragment.VisualizationFragment"
+        android:label="fragment_visualization"
+        tools:layout="@layout/fragment_visualization" />
+    <fragment
         android:id="@+id/displayExpenseFragment"
-        android:name="com.example.expensetracker.DisplayExpenseFragment"
+        android:name="com.example.expensetracker.fragment.DisplayExpenseFragment"
         android:label="fragment_display_expense"
         tools:layout="@layout/fragment_display_expense" />
 </navigation>

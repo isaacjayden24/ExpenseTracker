@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardElevation="6dp"
+    android:backgroundTint="@color/colorPrimary"
     app:cardCornerRadius="16dp">
 
     <LinearLayout
@@ -29,7 +30,7 @@
                 android:text="Amount: $0.00"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"/>
+                android:textColor="@color/surface_light"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/delete_button"
@@ -38,7 +39,7 @@
                 android:contentDescription="delete"
                 app:icon="@drawable/delete_button"
                 app:iconTint="@color/white"
-                app:backgroundTint="@color/red"
+                app:backgroundTint="@color/colorPrimaryDark"
                 app:iconGravity="textStart"
                 android:layout_marginStart="16dp"
                 android:layout_gravity="center_vertical"
@@ -51,7 +52,8 @@
             android:layout_height="wrap_content"
             android:text="Category: Food"
             android:textSize="18sp"
-            android:textColor="@color/gray"
+            android:textStyle="bold"
+            android:textColor="@color/surface_light"
             android:layout_marginTop="8dp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -60,7 +62,8 @@
             android:layout_height="wrap_content"
             android:text="Description: Lunch with friends"
             android:textSize="16sp"
-            android:textColor="@color/black"
+            android:textColor="@color/surface_light"
+            android:textStyle="bold"
             android:layout_marginTop="4dp" />
 
         <!-- Additional Info Section -->
@@ -70,7 +73,8 @@
             android:layout_height="wrap_content"
             android:text="Date: 01/01/2024"
             android:textSize="14sp"
-            android:textColor="@color/gray"
+            android:textStyle="bold"
+            android:textColor="@color/surface_light"
             android:layout_marginTop="8dp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -79,7 +83,8 @@
             android:layout_height="wrap_content"
             android:text="Payment Method: Credit Card"
             android:textSize="14sp"
-            android:textColor="@color/gray"
+            android:textStyle="bold"
+            android:textColor="@color/surface_light"
             android:layout_marginTop="4dp" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

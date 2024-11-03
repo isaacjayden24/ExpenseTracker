@@ -5,12 +5,13 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".ExpenseFragment"
+tools:context=".fragment.ExpenseFragment"
 android:background="#F8F9FA">
 
 <com.google.android.material.appbar.AppBarLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
@@ -18,7 +19,7 @@ android:background="#F8F9FA">
         android:layout_height="?attr/actionBarSize"
         app:title="Add Expense"
         app:menu="@menu/top_app_bar"
-        style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
+        android:background="?attr/colorPrimary"/>
 
 </com.google.android.material.appbar.AppBarLayout>
 
@@ -45,6 +46,7 @@ android:background="#F8F9FA">
                 android:id="@+id/amountInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnBackground"
                 android:inputType="numberDecimal"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -61,6 +63,7 @@ android:background="#F8F9FA">
                 android:id="@+id/categoryDropdown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:popupBackground="@color/colorPrimary"
                 android:inputType="none"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -97,6 +100,7 @@ android:background="#F8F9FA">
                 android:id="@+id/descriptionInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
                 android:inputType="textMultiLine"
                 android:minLines="2"/>
 
@@ -121,6 +125,7 @@ android:background="#F8F9FA">
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Receipt Image"
+                    android:textColor="?attr/colorOnBackground"
                     android:textAppearance="?attr/textAppearanceBodyLarge"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -148,6 +153,7 @@ android:background="#F8F9FA">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:textColor="?attr/colorOnBackground"
             android:text="Payment method"
             android:textAppearance="?attr/textAppearanceBodyLarge"/>
 
@@ -202,6 +208,8 @@ android:background="#F8F9FA">
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Save Expense"
+            android:textColor="@color/surface_light"
+            style="@style/Widget.MaterialComponents.Button"
             android:padding="12dp"/>
 
     </LinearLayout>

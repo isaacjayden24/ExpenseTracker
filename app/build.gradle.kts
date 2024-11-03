@@ -50,6 +50,8 @@ dependencies {
 
     implementation ( "androidx.fragment:fragment-ktx:1.8.0")
 
+    implementation ("androidx.core:core-splashscreen:1.0.1")
+
 
     // Room components
     implementation("androidx.room:room-ktx:2.6.1")

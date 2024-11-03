@@ -25,8 +25,22 @@ interface ExpenseDao {
     suspend fun getAllExpenses(): List<Expense>
 
     // Get expenses by category
-    @Query("SELECT * FROM expense_table WHERE category = :category")
+    @Query("SELECT * FROM expense_table WHERE category = :category ")
     suspend fun getExpensesByCategory(category: String): List<Expense>
+
+   /* //Get expenses by day
+    @Query("SELECT * FROM expense_table WHERE date = :date")
+    suspend fun getExpensesByDay(date: String): List<Expense>*/
+
+
+
+
+    //get expenses by date range and category
+    @Query("SELECT * FROM expense_table WHERE date BETWEEN :startDate AND :endDate AND category = :category")
+    suspend fun getExpensesByDateRangeAndCategory(startDate: Long, endDate: Long, category: String): List<Expense>
+
+
+
 
     // Get an expense by its ID
     @Query("SELECT * FROM expense_table WHERE id = :id")
