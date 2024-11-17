@@ -10,6 +10,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -54,11 +55,13 @@ class ExpenseFragment : Fragment() {
     private lateinit var descriptionInput:EditText
     private lateinit var chipGroup:ChipGroup
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,12 +71,36 @@ class ExpenseFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_expense, container, false)
 
+
+        // Find the toolbar and set it up {top bar navigation}
+        val toolbar = view.findViewById<Toolbar>(R.id.topAppBar)
+        toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_categories -> {
+                    // Handle Categories action
+                    findNavController().navigate(R.id.action_expenseFragment_to_displayExpenseFragment)
+                    true
+                }
+                R.id.action_export -> {
+                    // Handle Export action
+                    findNavController().navigate(R.id.action_expenseFragment_to_visualizationFragment)
+                    true
+                }
+                R.id.action_settings -> {
+                    // Handle Settings action
+                    true
+                }
+                else -> false
+            }
+        }
+
         amountInput = view.findViewById(R.id.amountInput)
         btnAdd = view.findViewById(R.id.btn_add)
         categoryDropdown=view.findViewById(R.id.categoryDropdown)
         dateInput=view.findViewById(R.id.dateInput)
         descriptionInput=view.findViewById(R.id.descriptionInput)
         chipGroup=view.findViewById(R.id.tagChipGroup)
+
 
         //adapter to hold the category items
         val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line, categories)
@@ -117,7 +144,38 @@ class ExpenseFragment : Fragment() {
         return view
     }
 
-//function to input the date
+
+
+   /* override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.top_app_bar, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_categories -> {
+
+                findNavController().navigate(R.id.action_expenseFragment_to_displayExpenseFragment)
+                true
+            }
+            R.id.action_export -> {
+                // Handle Export action
+                // Example: show an export dialog
+               // showExportDialog()
+                true
+            }
+            R.id.action_settings -> {
+                // Handle Settings action
+                // Example: navigate to Settings fragment or open settings activity
+                findNavController().navigate(R.id.action_expenseFragment_to_visualizationFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }*/
+
+
+    //function to input the date
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -199,9 +257,10 @@ class ExpenseFragment : Fragment() {
         )
         expenseViewModel.addExpense(newExpense)
 
-        findNavController().navigate(R.id.action_expenseFragment_to_displayExpenseFragment)
+       // findNavController().navigate(R.id.action_expenseFragment_to_displayExpenseFragment)
 
-        //findNavController().navigate(R.id.action_expenseFragment_to_visualizationFragment)
+        findNavController().navigate(R.id.action_expenseFragment_to_visualizationFragment)
+
     }
 
 

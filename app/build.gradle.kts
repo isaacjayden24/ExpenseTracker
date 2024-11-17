@@ -53,6 +53,10 @@ dependencies {
     implementation ("androidx.core:core-splashscreen:1.0.1")
 
 
+    //bar chart
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+
     // Room components
     implementation("androidx.room:room-ktx:2.6.1")
     implementation("androidx.room:room-runtime:2.6.1")
@@ -69,6 +73,7 @@ dependencies {
 kapt {
     correctErrorTypes = true
 }
+
 
 
 
