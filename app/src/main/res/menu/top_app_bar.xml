@@ -15,7 +15,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         <!-- Submenu items -->
         <item
             android:id="@+id/action_categories"
-            android:icon="@drawable/ic_category"
+            android:icon="@drawable/ic_money"
             android:title="Categories"/>
 
         <item
@@ -24,9 +24,9 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:title="Export"/>
 
         <item
-            android:id="@+id/action_settings"
-            android:icon="@drawable/ic_settings"
-            android:title="Settings"/>
+            android:id="@+id/action_list"
+            android:icon="@drawable/ic_search"
+            android:title="Expense"/>
     </menu>
 </item>
 </menu>

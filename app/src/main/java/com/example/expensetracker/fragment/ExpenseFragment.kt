@@ -54,6 +54,7 @@ class ExpenseFragment : Fragment() {
     private lateinit var categoryDropdown: AutoCompleteTextView
     private lateinit var descriptionInput:EditText
     private lateinit var chipGroup:ChipGroup
+    private lateinit var uploadButton:Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,17 +78,18 @@ class ExpenseFragment : Fragment() {
         toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.action_categories -> {
-                    // Handle Categories action
-                    findNavController().navigate(R.id.action_expenseFragment_to_displayExpenseFragment)
+                    // navigate to visualization fragment for graphs
+                    findNavController().navigate(R.id.action_expenseFragment_to_visualizationFragment)
                     true
                 }
                 R.id.action_export -> {
                     // Handle Export action
-                    findNavController().navigate(R.id.action_expenseFragment_to_visualizationFragment)
+                    Toast.makeText(context, "Feature coming soon", Toast.LENGTH_SHORT).show()
                     true
                 }
-                R.id.action_settings -> {
-                    // Handle Settings action
+                R.id.action_list -> {
+                    //navigate to display expense fragment
+                    findNavController().navigate(R.id.action_expenseFragment_to_displayExpenseFragment)
                     true
                 }
                 else -> false
@@ -100,6 +102,7 @@ class ExpenseFragment : Fragment() {
         dateInput=view.findViewById(R.id.dateInput)
         descriptionInput=view.findViewById(R.id.descriptionInput)
         chipGroup=view.findViewById(R.id.tagChipGroup)
+        uploadButton=view.findViewById(R.id.uploadButton)
 
 
         //adapter to hold the category items
@@ -123,6 +126,10 @@ class ExpenseFragment : Fragment() {
 
 
 
+        //upload receipt button on click
+        uploadButton.setOnClickListener {
+            Toast.makeText(context, "Feature coming soon", Toast.LENGTH_SHORT).show()
+        }
 
         // Disable manual text input for the date field
         dateInput.setOnClickListener {
@@ -146,33 +153,7 @@ class ExpenseFragment : Fragment() {
 
 
 
-   /* override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.top_app_bar, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_categories -> {
-
-                findNavController().navigate(R.id.action_expenseFragment_to_displayExpenseFragment)
-                true
-            }
-            R.id.action_export -> {
-                // Handle Export action
-                // Example: show an export dialog
-               // showExportDialog()
-                true
-            }
-            R.id.action_settings -> {
-                // Handle Settings action
-                // Example: navigate to Settings fragment or open settings activity
-                findNavController().navigate(R.id.action_expenseFragment_to_visualizationFragment)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }*/
 
 
     //function to input the date
@@ -262,6 +243,8 @@ class ExpenseFragment : Fragment() {
         findNavController().navigate(R.id.action_expenseFragment_to_visualizationFragment)
 
     }
+
+
 
 
 

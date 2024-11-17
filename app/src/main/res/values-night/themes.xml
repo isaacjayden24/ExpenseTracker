@@ -12,6 +12,7 @@
         <item name="colorSecondary">@color/colorSecondary</item>
 
         <item name="colorOnSurface">@color/on_surface_light</item>
+
     </style>
 
 

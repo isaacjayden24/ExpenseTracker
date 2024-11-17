@@ -10,8 +10,11 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expensetracker.ExpenseTrackerApp
@@ -77,6 +80,8 @@ class VisualizationFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
 
+
+
     }
 
     override fun onCreateView(
@@ -85,6 +90,18 @@ class VisualizationFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_visualization, container, false)
+
+        // Set up toolbar
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+        // Enable back button in the toolbar
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        // Handle the navigation icon click
+        toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack() // Go back to the previous fragment
+        }
 
         dateInput=view.findViewById(R.id.dateInput)
         dateOutPut=view.findViewById(R.id.dateOutput)
