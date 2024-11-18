@@ -249,6 +249,18 @@ class ExpenseFragment : Fragment() {
 
 
 
+    //on destroy function to reset the date,category,payment,description
+    override fun onResume() {
+        super.onResume()
+        amountInput.setText("")
+        descriptionInput.setText("")
+        categoryDropdown.setText("")
+        selectedDateInMillis = null
+    }
+
+
+
+
 
 
 }

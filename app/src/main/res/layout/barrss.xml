@@ -2,31 +2,36 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
 xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
-tools:context=".fragment.VisualizationFragment"
-android:layout_height="match_parent">
+android:layout_height="match_parent"
+android:background="?attr/colorSurface"
+tools:context=".fragment.VisualizationFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
+<com.google.android.material.appbar.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    app:elevation="0dp">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIconTint="?attr/colorOnSurface"
+        app:title="Analytics"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_arrow_back"
-            app:title="Analytics"
-            android:background="@color/colorPrimary"
-
-            />
-
-    </com.google.android.material.appbar.AppBarLayout>
+</com.google.android.material.appbar.AppBarLayout>
 
 <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:overScrollMode="never"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
@@ -35,9 +40,9 @@ android:layout_height="match_parent">
         android:orientation="vertical"
         android:padding="16dp">
 
-
         <!-- Date Range Card -->
         <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Material3.CardView.Elevated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -53,7 +58,6 @@ android:layout_height="match_parent">
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:textColor="?attr/colorOnBackground"
                     android:text="Select Date Range"
                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
@@ -94,29 +98,29 @@ android:layout_height="match_parent">
 
         </com.google.android.material.card.MaterialCardView>
 
-
-        <!-- Category Dropdown -->
+        <!-- Category Filter -->
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:hint="Filter by Category"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+            android:hint="Filter by Category">
 
             <AutoCompleteTextView
                 android:id="@+id/categoryDropdownVisualization"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:popupBackground="@color/colorPrimary"
-                android:inputType="none"/>
+                android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Expenses Bar Chart Card -->
         <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Material3.CardView.Elevated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -127,28 +131,26 @@ android:layout_height="match_parent">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?attr/colorOnBackground"
+                    android:layout_marginBottom="16dp"
                     android:text="Monthly Expenses"
-                    android:textAppearance="?attr/textAppearanceBody1"/>
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/barChart"
                     android:layout_width="match_parent"
-                    android:layout_height="198dp" />
-
-
+                    android:layout_height="240dp" />
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-
-
-
+        <!-- Expenses Pie Chart Card -->
         <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Material3.CardView.Elevated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -159,41 +161,38 @@ android:layout_height="match_parent">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?attr/colorOnBackground"
-                    android:text="Total Expense Distribution"
-                    android:textAppearance="?attr/textAppearanceBody1"/>
+                    android:layout_marginBottom="16dp"
+                    android:text="Expense Distribution"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pieChart"
                     android:layout_width="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_height="300dp" />
-
-
+                    android:layout_height="300dp"
+                    android:layout_gravity="center" />
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-
+        <!-- Top Spending Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Top Spending"
-            android:textColor="@color/colorPrimary"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="8dp"
+            android:text="Top Spending Categories"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/visualizationRecylerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

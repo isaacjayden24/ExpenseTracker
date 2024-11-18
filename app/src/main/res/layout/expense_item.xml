@@ -6,89 +6,97 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardElevation="6dp"
-    android:backgroundTint="@color/colorPrimary"
-    app:cardCornerRadius="16dp">
+    app:cardElevation="2dp"
+    app:cardCornerRadius="24dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="?attr/colorOutline">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="start|center_vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/amount_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Amount: $0.00"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/surface_light"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/delete_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="delete"
-                app:icon="@drawable/delete_button"
-                app:iconTint="@color/white"
-                app:backgroundTint="@color/colorPrimaryDark"
-                app:iconGravity="textStart"
-                android:layout_marginStart="16dp"
-                android:layout_gravity="center_vertical"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
-        </LinearLayout>
-
+        <!-- Amount and Delete Button Row -->
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/category_text"
+            android:id="@+id/amount_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="$120.50"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/delete_button"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delete_button"
+            style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category: Food"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/surface_light"
-            android:layout_marginTop="8dp" />
+            app:icon="@drawable/delete_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="delete"/>
 
+        <!-- Category Chip -->
+        <com.google.android.material.chip.Chip
+            android:id="@+id/category_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            app:chipBackgroundColor="?attr/colorSurfaceVariant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/amount_text"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Description -->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/details_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Description: Lunch with friends"
-            android:textSize="16sp"
-            android:textColor="@color/surface_light"
-            android:textStyle="bold"
-            android:layout_marginTop="4dp" />
+            android:text="Lunch with friends"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/category_chip"
+            android:layout_marginTop="16dp"/>
 
-        <!-- Additional Info Section -->
+        <!-- Divider -->
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/details_text"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Bottom Info Row -->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date: 01/01/2024"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/surface_light"
-            android:layout_marginTop="8dp" />
+            android:text="Jan 1, 2024"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            android:layout_marginTop="16dp"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/payment_method_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Payment Method: Credit Card"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/surface_light"
-            android:layout_marginTop="4dp" />
-    </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+            android:text="Credit Card"
+            android:drawablePadding="4dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            android:layout_marginTop="16dp"
+            app:drawableTint="?attr/colorOnSurfaceVariant"/>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
 
 
 

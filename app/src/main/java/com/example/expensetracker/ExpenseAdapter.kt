@@ -34,7 +34,7 @@ class ExpenseAdapter(private val onDeleteClick: (Expense) -> Unit)
     // ViewHolder class
     class ExpenseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val expenseAmountTextView: TextView = itemView.findViewById(R.id.amount_text)//amount
-        private val expenseCategoryTextView: TextView = itemView.findViewById(R.id.category_text)//category
+        private val expenseCategoryTextView: TextView = itemView.findViewById(R.id.category_chip)//category
         private val expenseDetailsTextView: TextView = itemView.findViewById(R.id.details_text)//description
         private val expenseDateTextView:TextView=itemView.findViewById(R.id.date_text)//date
         private val expensePaymentMethodTextView:TextView=itemView.findViewById(R.id.payment_method_text)//payment
