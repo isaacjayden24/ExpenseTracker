@@ -19,7 +19,7 @@ Built with kotlin.
 
 ## Releases 
 
-Download the APK from [AppStoreGallery][https://appgallery.huawei.com/app/C113467943]
+Download the APK from [AppGallery][https://appgallery.huawei.com/app/C113467943]
 
 
 # Set up Requirements
