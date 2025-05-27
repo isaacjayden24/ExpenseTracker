@@ -42,11 +42,7 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-/**
- * A simple [Fragment] subclass.
- * Use the [VisualizationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class VisualizationFragment : Fragment() {
 
 
@@ -186,6 +182,10 @@ class VisualizationFragment : Fragment() {
             }
 
         }
+
+
+
+
 
 
 
@@ -405,6 +405,7 @@ class VisualizationFragment : Fragment() {
 
 
     //function to set up pie chart
+
     private fun setupPieChart(categoryTotals: List<CategoryTotal>) {
         // Create entries for each category and amount
         val entries = categoryTotals.map { categoryTotal ->
@@ -412,12 +413,11 @@ class VisualizationFragment : Fragment() {
         }
 
         // Create the DataSet and customize colors
-        val dataSet = PieDataSet(entries, "Expenses by Category").apply {
+        val dataSet = PieDataSet(entries, null).apply { // Set dataset label to null to avoid a single legend entry
             setColors(*ColorTemplate.MATERIAL_COLORS)  // Multiple colors for each slice
             valueTextColor = Color.WHITE               // Text color for values inside the pie
             valueTextSize = 12f                        // Text size for values
-
-
+            sliceSpace = 2f                            // Space between slices
         }
 
         // PieData to hold the DataSet
@@ -433,17 +433,17 @@ class VisualizationFragment : Fragment() {
         // Configure the PieChart
         pieChart.apply {
             data = pieData
-            isDrawHoleEnabled = true             // Enables a hole in the center of the chart
-            holeRadius = 50f                     // Radius of the hole if enabled
-            centerText = "Total Expenses"        // Optional: Center text
-            setCenterTextSize(16f)
-            setEntryLabelColor(Color.BLACK)      // Color for the category labels
-            setEntryLabelTextSize(12f)           // Text size for the category labels
-            setDrawEntryLabels(false)            // Hides labels on the slices
-            setUsePercentValues(true)            // Display values as percentages
-            description.isEnabled = false        // Disable description text
+            isDrawHoleEnabled = true
+            holeRadius = 45f
+            transparentCircleRadius = 50f
+            centerText = "Expenses Breakdown"
+            setCenterTextSize(18f)
+            setEntryLabelTextSize(12f)
+            setEntryLabelColor(Color.BLACK)
+            setUsePercentValues(true)
+            description.isEnabled = false
 
-            // Configure the legend for better readability
+            // Enable legend and configure it
             legend.apply {
                 isEnabled = true
                 form = Legend.LegendForm.CIRCLE
@@ -453,9 +453,18 @@ class VisualizationFragment : Fragment() {
                 textSize = 12f
             }
 
+             // Disable the legend
+            legend.isEnabled = false
+
             invalidate() // Refresh the chart
         }
     }
+
+
+
+
+
+
 
 
 

@@ -18,11 +18,7 @@ import com.example.expensetracker.entity.ExpenseViewModel
 import com.example.expensetracker.entity.ExpenseViewModelFactory
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DisplayExpenseFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class DisplayExpenseFragment : Fragment() {
 
 

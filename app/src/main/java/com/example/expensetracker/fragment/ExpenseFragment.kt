@@ -28,11 +28,7 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ExpenseFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class ExpenseFragment : Fragment() {
 
     val categories = listOf("Food", "Bills", "Subscription", "Rent", "Electricity","Transport","Entertainment","Fuel","Savings","Friends","clothes","Others")//categories for expenses dropdown
@@ -129,6 +125,7 @@ class ExpenseFragment : Fragment() {
         //upload receipt button on click
         uploadButton.setOnClickListener {
             Toast.makeText(context, "Feature coming soon", Toast.LENGTH_SHORT).show()
+
         }
 
         // Disable manual text input for the date field
